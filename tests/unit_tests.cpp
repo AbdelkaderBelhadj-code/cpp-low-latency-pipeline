@@ -46,7 +46,7 @@ void test_spsc_single_thread() {
 // The real test of a concurrent queue: two threads, many items, nothing lost, nothing reordered.
 template <typename Queue>
 void test_two_threads(Queue& q, const char* name) {
-    constexpr std::uint64_t kCount = 500'000;
+    static constexpr std::uint64_t kCount = 500'000;  // static: the lambdas can use it without capturing it
     bool in_order = true;
     std::uint64_t sum = 0;
     std::thread producer([&q] {
